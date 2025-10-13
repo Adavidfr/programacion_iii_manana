@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de contacto - Tienda de Móviles</title>
+</head>
+<body>
+    <p>Contáctanos</p>
+    <form action="procesar.php" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+        <br><br>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" placeholder="Ingrese su correo">
+        <br><br>
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="4" cols="50" placeholder="Escriba su consulta sobre equipos móviles"></textarea>
+        <br><br>
+        <input type="submit" value="Enviar">
+        <input type="reset" value="Limpiar">
+    </form>
+</body>
+</html>
