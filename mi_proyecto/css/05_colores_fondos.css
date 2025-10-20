@@ -1,6 +1,6 @@
 .fondo {
     color:white;
-    background-image: url("fondo.jpg");
+    background-image: url("../imagenes/fondoCelular.png");
     background-size: cover;
     background-position: center;
     background-color: aqua;
