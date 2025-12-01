@@ -1,53 +1,91 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './user.entity';
+import {
+  Controller, Get, Post, Put, Delete, Body, Param,
+  Query, BadRequestException, NotFoundException,
+  UseInterceptors, UploadedFile,
+  InternalServerErrorException
+} from '@nestjs/common';
+import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import * as bcrypt from 'bcrypt';
+import { SuccessResponseDto } from 'src/common/dto/response.dto';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { User } from './user.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
-@Injectable()
-export class UsersService {
-  constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-  ) {}
+@Controller('users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) { }
 
-  async create(createUserDto: CreateUserDto) {
-    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-    const user = this.userRepository.create({
-      ...createUserDto,
-      password: hashedPassword,
-    });
-    return this.userRepository.save(user);
+  @Post()
+  async create(@Body() dto: CreateUserDto) {
+      const user = await this.usersService.create(dto);
+      return new SuccessResponseDto('User created successfully', user);
   }
 
-  findAll() {
-    return this.userRepository.find();
+  @Get()
+  async findAll(
+      @Query('page') page = 1,
+      @Query('limit') limit = 10,
+      @Query('search') search?: string,
+      @Query('searchField') searchField = 'name',
+      @Query('sortBy') sortBy = 'id',
+      @Query('sortOrder') sortOrder: 'ASC' | 'DESC' = 'ASC',
+  ) {
+      limit = Number(limit);
+      page = Number(page);
+      limit = limit > 100 ? 100 : limit;
+
+      const user = await this.usersService.findAll({
+          page,
+          limit,
+          search,
+          searchField,
+          sortBy,
+          sortOrder,
+      });
+
+      return new SuccessResponseDto('User created successfully', user);
   }
 
-  findOne(id: string) {
-    return this.userRepository.findOne({ where: { id } });
-  }
-  async findByUsername(username: string) {
-    return this.userRepository.findOne({ where: { username } });
-  }
-
-  async update(id: string, updateUserDto: UpdateUserDto) {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) return null;
-
-    if (updateUserDto.password) {
-      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
-    }
-
-    Object.assign(user, updateUserDto);
-    return this.userRepository.save(user);
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+      const user = await this.usersService.findOne(id);
+      if (!user) throw new NotFoundException('User not found');
+      return new SuccessResponseDto('User retrieved successfully', user);
   }
 
-  async remove(id: string) {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) return null;
-    return this.userRepository.remove(user);
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
+      const user = await this.usersService.update(id, dto);
+      if (!user) throw new NotFoundException('User not found');
+      return new SuccessResponseDto('User updated successfully', user);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+      const user = await this.usersService.remove(id);
+      if (!user) throw new NotFoundException('User not found');
+      return new SuccessResponseDto('User deleted successfully', user);
+  }
+
+  @Put(':id/profile')
+  @UseInterceptors(FileInterceptor('profile', {
+      storage: diskStorage({
+      destination: './public/profile',
+      filename: (req, file, cb) => cb(null, ${Date.now()}-${file.originalname})
+      }),
+      fileFilter: (req, file, cb) => {
+      if (!file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
+          return cb(new BadRequestException('Only JPG or PNG files are allowed'), false);
+      }
+      cb(null, true);
+      }
+  }))
+  async uploadProfile(@Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
+      if (!file) throw new BadRequestException('Profile image is required');
+      const user = await this.usersService.updateProfile(id, file.filename);
+      if (!user) throw new NotFoundException('User not found');
+      return new SuccessResponseDto('Profile image updated', user);
   }
 }
