@@ -19,73 +19,63 @@ export class UsersController {
 
   @Post()
   async create(@Body() dto: CreateUserDto) {
-      const user = await this.usersService.create(dto);
-      return new SuccessResponseDto('User created successfully', user);
+    const user = await this.usersService.create(dto);
+    return new SuccessResponseDto('User created successfully', user);
   }
 
   @Get()
   async findAll(
-      @Query('page') page = 1,
-      @Query('limit') limit = 10,
-      @Query('search') search?: string,
-      @Query('searchField') searchField = 'name',
-      @Query('sortBy') sortBy = 'id',
-      @Query('sortOrder') sortOrder: 'ASC' | 'DESC' = 'ASC',
-  ) {
-      limit = Number(limit);
-      page = Number(page);
-      limit = limit > 100 ? 100 : limit;
+    @Query('page') page = 1,
+    @Query('limit') limit = 10,
+    @Query('isActive') isActive?: string,
+  ): Promise<SuccessResponseDto<Pagination<User>>> {
+    if (isActive !== undefined && isActive !== 'true' && isActive !== 'false') {
+      throw new BadRequestException('Invalid value for "isActive". Use "true" or "false".');
+    }
+    const result = await this.usersService.findAll({ page, limit }, isActive === 'true');
+    if (!result) throw new InternalServerErrorException('Could not retrieve users');
 
-      const user = await this.usersService.findAll({
-          page,
-          limit,
-          search,
-          searchField,
-          sortBy,
-          sortOrder,
-      });
-
-      return new SuccessResponseDto('User created successfully', user);
+    return new SuccessResponseDto('Users retrieved successfully', result);
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-      const user = await this.usersService.findOne(id);
-      if (!user) throw new NotFoundException('User not found');
-      return new SuccessResponseDto('User retrieved successfully', user);
+    const user = await this.usersService.findOne(id);
+    if (!user) throw new NotFoundException('User not found');
+    return new SuccessResponseDto('User retrieved successfully', user);
   }
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
-      const user = await this.usersService.update(id, dto);
-      if (!user) throw new NotFoundException('User not found');
-      return new SuccessResponseDto('User updated successfully', user);
+    const user = await this.usersService.update(id, dto);
+    if (!user) throw new NotFoundException('User not found');
+    return new SuccessResponseDto('User updated successfully', user);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-      const user = await this.usersService.remove(id);
-      if (!user) throw new NotFoundException('User not found');
-      return new SuccessResponseDto('User deleted successfully', user);
+    const user = await this.usersService.remove(id);
+    if (!user) throw new NotFoundException('User not found');
+    return new SuccessResponseDto('User deleted successfully', user);
   }
 
   @Put(':id/profile')
   @UseInterceptors(FileInterceptor('profile', {
-      storage: diskStorage({
+    storage: diskStorage({
       destination: './public/profile',
-      filename: (req, file, cb) => cb(null, ${Date.now()}-${file.originalname})
-      }),
-      fileFilter: (req, file, cb) => {
+      filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
+    }),
+    fileFilter: (req, file, cb) => {
       if (!file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
-          return cb(new BadRequestException('Only JPG or PNG files are allowed'), false);
+        return cb(new BadRequestException('Only JPG or PNG files are allowed'), false);
       }
       cb(null, true);
-      }
+    }
   }))
   async uploadProfile(@Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
-      if (!file) throw new BadRequestException('Profile image is required');
-      const user = await this.usersService.updateProfile(id, file.filename);
-      if (!user) throw new NotFoundException('User not found');
-      return new SuccessResponseDto('Profile image updated', user);
+    if (!file) throw new BadRequestException('Profile image is required');
+    const user = await this.usersService.updateProfile(id, file.filename);
+    if (!user) throw new NotFoundException('User not found');
+    return new SuccessResponseDto('Profile image updated', user);
   }
 }
