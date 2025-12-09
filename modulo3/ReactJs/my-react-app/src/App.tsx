@@ -49,12 +49,13 @@
 //export default App;
 
 
-import ParentLoginForm from "./props/ParentLoginForm";
+import ParentAreaTriangulo from "./props/ParentAreaTriangulo";
+
 
 function App () {
   return (
     <>
-    <ParentLoginForm/>
+    <ParentAreaTriangulo/>
 
     
     </>
