@@ -49,13 +49,30 @@
 //export default App;
 
 
-import ParentAreaTriangulo from "./props/ParentAreaTriangulo";
+
+
+import AccessWithLimit from "./useState/AccesWithLimit";
+import CheckboxSummary from "./useState/CheckboxSummary";
+import DocumentTitleChanger from "./useState/DocumentTitleChanger";
+import HoverFont from "./useState/HoverFont";
+import LanguageSwitcher from "./useState/LanguageSwitcher";
+import LoginWithLimit from "./useState/LoginWithLimit";
+import MultiSwitch from "./useState/MultiSwitch";
+import PostLikes from "./useState/PostLikes";
 
 
 function App () {
   return (
     <>
-    <ParentAreaTriangulo/>
+
+    <HoverFont />
+    <AccessWithLimit />
+    <LoginWithLimit />
+    <DocumentTitleChanger />
+    <PostLikes />
+    <CheckboxSummary />
+    <LanguageSwitcher />
+    <MultiSwitch />
 
     
     </>
