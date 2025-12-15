@@ -51,9 +51,14 @@
 
 
 
+import FetchUser from "./useEffect/FetchUser";
+import LogEffect from "./useEffect/LogEffect";
+import ScrollLogger from "./useEffect/ScrollLoger";
 import AccessWithLimit from "./useState/AccesWithLimit";
 import CheckboxSummary from "./useState/CheckboxSummary";
+import ClickHistory from "./useState/ClickHistory";
 import DocumentTitleChanger from "./useState/DocumentTitleChanger";
+import DynamicColor from "./useState/DynamicColor";
 import HoverFont from "./useState/HoverFont";
 import LanguageSwitcher from "./useState/LanguageSwitcher";
 import LoginWithLimit from "./useState/LoginWithLimit";
@@ -73,6 +78,11 @@ function App () {
     <CheckboxSummary />
     <LanguageSwitcher />
     <MultiSwitch />
+    <DynamicColor />
+    <ClickHistory />
+    <LogEffect />
+    <FetchUser />
+    <ScrollLogger />
 
     
     </>
