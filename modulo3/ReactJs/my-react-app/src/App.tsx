@@ -54,6 +54,9 @@
 import FetchUser from "./useEffect/FetchUser";
 import LogEffect from "./useEffect/LogEffect";
 import ScrollLogger from "./useEffect/ScrollLoger";
+import CirculoColorido from "./useRef/CirculoColorido";
+import ReproductorSonido from "./useRef/ReproductorSonido";
+import ScrollDemo from "./useRef/ScrollDemo";
 import AccessWithLimit from "./useState/AccesWithLimit";
 import CheckboxSummary from "./useState/CheckboxSummary";
 import ClickHistory from "./useState/ClickHistory";
@@ -83,6 +86,9 @@ function App () {
     <LogEffect />
     <FetchUser />
     <ScrollLogger />
+    <CirculoColorido />
+    <ScrollDemo />
+    <ReproductorSonido />
 
     
     </>
