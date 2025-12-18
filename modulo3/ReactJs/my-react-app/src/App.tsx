@@ -47,52 +47,111 @@
 //
 //
 //export default App;
+//
+//
+//
+//import FetchUser from "./useEffect/FetchUser";
+//import LogEffect from "./useEffect/LogEffect";
+//import ScrollLogger from "./useEffect/ScrollLoger";
+//import ExpensiveCalc from "./useMemo/ExpensiveCalc";
+//import FiltroLista from "./useMemo/FiltroLista";
+//import TablaOrdenada from "./useMemo/TablaOrdenada";
+//import CirculoColorido from "./useRef/CirculoColorido";
+//import ReproductorSonido from "./useRef/ReproductorSonido";
+//import ScrollDemo from "./useRef/ScrollDemo";
+//import AccessWithLimit from "./useState/AccesWithLimit";
+//import CheckboxSummary from "./useState/CheckboxSummary";
+//import ClickHistory from "./useState/ClickHistory";
+//import DocumentTitleChanger from "./useState/DocumentTitleChanger";
+//import DynamicColor from "./useState/DynamicColor";
+//import HoverFont from "./useState/HoverFont";
+//import LanguageSwitcher from "./useState/LanguageSwitcher";
+//import LoginWithLimit from "./useState/LoginWithLimit";
+//import MultiSwitch from "./useState/MultiSwitch";
+//import PostLikes from "./useState/PostLikes";
+//import GenerarPrimos from "./useMemo/GenerarPrimos";
+//import ContadorLetras from "./useMemo/ContadorLetras";
+//import Contador from "./useCallback/Contador";
+//import ReRender from "./useCallback/ReRender";
+//import ListaProps from "./useCallback/ListaProps";
+//
+//
+//function App () {
+//  return (
+//    <>
+//
+//    <HoverFont />
+//    <AccessWithLimit />
+//    <LoginWithLimit />
+//    <DocumentTitleChanger />
+//    <PostLikes />
+//    <CheckboxSummary />
+//    <LanguageSwitcher />
+//    <MultiSwitch />
+//    <DynamicColor />
+//    <ClickHistory />
+//    <LogEffect />
+//    <FetchUser />
+//    <ScrollLogger />
+//    <CirculoColorido />
+//    <ScrollDemo />
+//    <ReproductorSonido />
+//    <ExpensiveCalc />
+//    <FiltroLista />
+//    <TablaOrdenada />
+//    <GenerarPrimos />
+//    <ContadorLetras />
+//    <Contador />
+//    <>
+//    <ReRender />
+//    </>
+//
+//    
+//    
+//    </>
+//  )
+//}
+//
+//export default App;
+//
 
+// import ListaProps from "./useCallback/ListaProps";
+// 
+// function App() {
+//   const elementos = ["uno", "dos", "tres", "cuatro"];
+// 
+//   return (
+//     <>
+//       <h2>Ejemplo de Lista</h2>
+//       <ListaProps items={elementos} />
+//     </>
+//   );
+// 
+// }
+// 
+// export default App;
 
+//import TablaMultiplicar from './useCallback/TablaMultiplicar';
+//
+//export default function App() {
+//  const numeros = [1, 2, 3, 4, 5];
+//
+//  return (
+//    <>
+//      <h2>Tablas de Multiplicar</h2>
+//      <TablaMultiplicar numeros={numeros} />
+//    </>
+//  );
+//}
+//
 
+import AreaCirculo from "./useReducer/AreaCirculo";
 
-import FetchUser from "./useEffect/FetchUser";
-import LogEffect from "./useEffect/LogEffect";
-import ScrollLogger from "./useEffect/ScrollLoger";
-import CirculoColorido from "./useRef/CirculoColorido";
-import ReproductorSonido from "./useRef/ReproductorSonido";
-import ScrollDemo from "./useRef/ScrollDemo";
-import AccessWithLimit from "./useState/AccesWithLimit";
-import CheckboxSummary from "./useState/CheckboxSummary";
-import ClickHistory from "./useState/ClickHistory";
-import DocumentTitleChanger from "./useState/DocumentTitleChanger";
-import DynamicColor from "./useState/DynamicColor";
-import HoverFont from "./useState/HoverFont";
-import LanguageSwitcher from "./useState/LanguageSwitcher";
-import LoginWithLimit from "./useState/LoginWithLimit";
-import MultiSwitch from "./useState/MultiSwitch";
-import PostLikes from "./useState/PostLikes";
-
-
-function App () {
+export default function App() {
   return (
-    <>
 
-    <HoverFont />
-    <AccessWithLimit />
-    <LoginWithLimit />
-    <DocumentTitleChanger />
-    <PostLikes />
-    <CheckboxSummary />
-    <LanguageSwitcher />
-    <MultiSwitch />
-    <DynamicColor />
-    <ClickHistory />
-    <LogEffect />
-    <FetchUser />
-    <ScrollLogger />
-    <CirculoColorido />
-    <ScrollDemo />
-    <ReproductorSonido />
 
-    
-    </>
+    <AreaCirculo />
+
   )
 }
-
-export default App;
