@@ -146,12 +146,20 @@
 //
 
 import AreaCirculo from "./useReducer/AreaCirculo";
+import HijoProps from "./useCallback/HijoProps";
+import Saludo from "./useCallback/Saludo";
+import Carrito from "./useReducer/Carrito";
+import FormSteps from "./useReducer/FormSteps";
+
 
 export default function App() {
-  return (
-
-
+return (
+  <>
     <AreaCirculo />
-
-  )
+    <HijoProps />
+    <Saludo />
+    <Carrito />
+    <FormSteps />
+  </>
+)
 }
