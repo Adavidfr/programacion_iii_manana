@@ -115,6 +115,7 @@
 //export default App;
 //
 
+
 // import ListaProps from "./useCallback/ListaProps";
 // 
 // function App() {
@@ -145,21 +146,29 @@
 //}
 //
 
-import AreaCirculo from "./useReducer/AreaCirculo";
-import HijoProps from "./useCallback/HijoProps";
-import Saludo from "./useCallback/Saludo";
-import Carrito from "./useReducer/Carrito";
-import FormSteps from "./useReducer/FormSteps";
+// import AreaCirculo from "./useReducer/AreaCirculo";
+// import HijoProps from "./useCallback/HijoProps";
+// import Saludo from "./useCallback/Saludo";
+// import Carrito from "./useReducer/Carrito";
+// import FormSteps from "./useReducer/FormSteps";
 
+
+// export default function App() {
+// return (
+//   <>
+//     <AreaCirculo />
+//     <HijoProps />
+//     <Saludo />
+//     <Carrito />
+//     <FormSteps />
+//   </>
+// )
+// }
+
+import CalculoSalarioSemanal from "./useState/CalculoSalarioSemanal";
 
 export default function App() {
-return (
-  <>
-    <AreaCirculo />
-    <HijoProps />
-    <Saludo />
-    <Carrito />
-    <FormSteps />
-  </>
-)
+  return (
+    <CalculoSalarioSemanal />
+  )
 }
