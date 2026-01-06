@@ -165,10 +165,17 @@
 // )
 // }
 
-import CalculoSalarioSemanal from "./useState/CalculoSalarioSemanal";
+import FormularioDiferido from "./useDeferredValue/FormularioDiferido";
+import GraficoDiferido from "./useDeferredValue/GraficoDiferido";
+import ValidacionEmail from "./useDeferredValue/ValidacionEmail";
 
 export default function App() {
   return (
-    <CalculoSalarioSemanal />
+    <>
+        <GraficoDiferido />
+        <ValidacionEmail />
+        <FormularioDiferido />
+    </>
+
   )
 }
