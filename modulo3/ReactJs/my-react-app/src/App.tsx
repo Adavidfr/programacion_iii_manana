@@ -165,6 +165,7 @@
 // )
 // }
 
+import FormularioRHF from "./formularios/FormularioRHF";
 import FormularioDiferido from "./useDeferredValue/FormularioDiferido";
 import GraficoDiferido from "./useDeferredValue/GraficoDiferido";
 import ValidacionEmail from "./useDeferredValue/ValidacionEmail";
@@ -175,6 +176,7 @@ export default function App() {
         <GraficoDiferido />
         <ValidacionEmail />
         <FormularioDiferido />
+        <FormularioRHF />
     </>
 
   )
