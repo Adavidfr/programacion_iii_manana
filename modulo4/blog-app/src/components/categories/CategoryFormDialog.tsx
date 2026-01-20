@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { CategoryDto } from "../../services/categories.service";
+import type { CategoryDto } from "../../services/categories.service";
+import type { JSX } from "react";
 
 type Props = {
   open: boolean;

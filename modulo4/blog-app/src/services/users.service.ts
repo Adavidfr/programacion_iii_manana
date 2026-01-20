@@ -27,28 +27,22 @@ export type PaginationDto<T> = {
   links?: PaginateLinks;
 };
 
-export type CategoryRefDto = {
+export type UserDto = {
   id: string;
-  name: string;
+  username: string;
+  email?: string;
+  role?: string;
 };
 
-export type PostDto = {
-  id: string;
-  title: string;
-  content: string;
-  categoryId?: string | null;
-  category?: CategoryRefDto | null;
-};
-
-export async function getPosts(params?: {
+export async function getUsers(params?: {
   page?: number;
   limit?: number;
   search?: string;
   searchField?: string;
   sort?: string;
   order?: "ASC" | "DESC";
-}): Promise<PaginationDto<PostDto>> {
-  const { data } = await api.get<SuccessResponseDto<PaginationDto<PostDto>>>("/posts", {
+}): Promise<PaginationDto<UserDto>> {
+  const { data } = await api.get<SuccessResponseDto<PaginationDto<UserDto>>>("/users", {
     params: {
       page: params?.page ?? 1,
       limit: params?.limit ?? 10,
@@ -61,28 +55,26 @@ export async function getPosts(params?: {
   return data.data;
 }
 
-export async function createPost(payload: {
-  title: string;
-  content: string;
-  categoryId?: string | null;
-}): Promise<PostDto> {
-  const { data } = await api.post<SuccessResponseDto<PostDto>>("/posts", payload);
+export async function createUser(payload: {
+  username: string;
+  email: string;
+  password: string;
+  role?: string;
+}): Promise<UserDto> {
+  const { data } = await api.post<SuccessResponseDto<UserDto>>("/users", payload);
   return data.data;
 }
 
-export async function updatePost(
-  id: string,
-  payload: {
-    title: string;
-    content: string;
-    categoryId?: string | null;
-  }
-): Promise<PostDto> {
-  const { data } = await api.put<SuccessResponseDto<PostDto>>(`/posts/${id}`, payload);
+export async function updateUser(id: string, payload: {
+  username: string;
+  email: string;
+  role?: string;
+}): Promise<UserDto> {
+  const { data } = await api.put<SuccessResponseDto<UserDto>>(`/users/${id}`, payload);
   return data.data;
 }
 
-export async function deletePost(id: string): Promise<PostDto> {
-  const { data } = await api.delete<SuccessResponseDto<PostDto>>(`/posts/${id}`);
+export async function deleteUser(id: string): Promise<UserDto> {
+  const { data } = await api.delete<SuccessResponseDto<UserDto>>(`/users/${id}`);
   return data.data;
 }
